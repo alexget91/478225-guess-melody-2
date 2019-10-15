@@ -1,7 +1,7 @@
 # Учебный проект «Угадай мелодию» [![Build status][travis-image]][travis-url]
 
 * Студент: [Алексей Гетманец](https://up.htmlacademy.ru/react/2/user/478225).
-* Наставник: `Неизвестно`.
+* Наставник: [Семён Якушев](https://up.htmlacademy.ru/react/2/user/1118791).
 
 ---
 
