@@ -1,5 +1,5 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
+import React from "react";
+import renderer from "react-test-renderer";
 import WelcomeScreen from "./welcome-screen";
 
 it(`Welcome screen correctly renders after relaunch`, () => {
@@ -7,7 +7,7 @@ it(`Welcome screen correctly renders after relaunch`, () => {
     .create(<WelcomeScreen
       time={0}
       errorCount={0}
-      onGameStartClick={jest.fn()}
+      onStartButtonClick={jest.fn()}
     />)
     .toJSON();
 

@@ -1,14 +1,14 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 const WelcomeScreen = (props) => {
-  const {time, errorCount, onGameStartClick} = props;
+  const {time, errorCount, onStartButtonClick} = props;
 
   return <section className="welcome">
     <div className="welcome__logo">
       <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
     </div>
-    <button className="welcome__button js-game-start" onClick={onGameStartClick}>
+    <button className="welcome__button js-game-start" onClick={onStartButtonClick}>
       <span className="visually-hidden">Начать игру</span>
     </button>
     <h2 className="welcome__rules-title">Правила игры</h2>
@@ -24,7 +24,7 @@ const WelcomeScreen = (props) => {
 WelcomeScreen.propTypes = {
   time: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
-  onGameStartClick: PropTypes.func.isRequired,
+  onStartButtonClick: PropTypes.func.isRequired
 };
 
 export default WelcomeScreen;
