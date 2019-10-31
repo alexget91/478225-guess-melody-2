@@ -1,5 +1,6 @@
 import React from "react";
-import {exact, oneOf, string, arrayOf, number, func} from "prop-types";
+import PropTypes from "prop-types";
+import {genreQuestion} from "../../common/global-prop-types";
 
 const GenreQuestionScreen = ({question, screenIndex, onAnswer}) => {
   const {
@@ -61,16 +62,9 @@ const GenreQuestionScreen = ({question, screenIndex, onAnswer}) => {
 };
 
 GenreQuestionScreen.propTypes = {
-  question: exact({
-    type: oneOf([`genre`, `artist`]).isRequired,
-    genre: string.isRequired,
-    answers: arrayOf(exact({
-      genre: string.isRequired,
-      src: string.isRequired,
-    })).isRequired,
-  }).isRequired,
-  screenIndex: number.isRequired,
-  onAnswer: func.isRequired
+  question: PropTypes.exact(genreQuestion).isRequired,
+  screenIndex: PropTypes.number.isRequired,
+  onAnswer: PropTypes.func.isRequired
 };
 
 export default GenreQuestionScreen;

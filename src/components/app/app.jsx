@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import WelcomeScreen from "../welcome-screen/welcome-screen";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
+import {artistQuestion, genreQuestion} from "../../common/global-prop-types";
 
 class App extends PureComponent {
   static getScreen(question, props, onUserAnswer) {
@@ -57,7 +58,6 @@ class App extends PureComponent {
         const isEnd = nextIndex >= questions.length;
 
         return {
-          ...prevState,
           question: !isEnd ? nextIndex : -1,
         };
       });
@@ -69,25 +69,8 @@ App.propTypes = {
   gameTime: PropTypes.number.isRequired,
   errorCount: PropTypes.number.isRequired,
   questions: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.exact({
-      type: PropTypes.oneOf([`genre`, `artist`]).isRequired,
-      genre: PropTypes.string.isRequired,
-      answers: PropTypes.arrayOf(PropTypes.exact({
-        genre: PropTypes.string.isRequired,
-        src: PropTypes.string.isRequired,
-      })).isRequired
-    }),
-    PropTypes.exact({
-      type: PropTypes.oneOf([`genre`, `artist`]).isRequired,
-      song: PropTypes.exact({
-        artist: PropTypes.string.isRequired,
-        src: PropTypes.string.isRequired,
-      }).isRequired,
-      answers: PropTypes.arrayOf(PropTypes.exact({
-        artist: PropTypes.string.isRequired,
-        picture: PropTypes.string.isRequired,
-      }))
-    }),
+    PropTypes.exact(genreQuestion),
+    PropTypes.exact(artistQuestion),
   ])).isRequired,
 };
 
