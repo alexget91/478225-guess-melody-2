@@ -18,7 +18,15 @@ it(`Artist question screen correctly renders after relaunch`, () => {
         }],
       }}
       onAnswer={jest.fn()}
-    />)
+    />,
+    {createNodeMock(element) {
+      if (element.type === `audio`) {
+        return {
+          createRef() {}
+        };
+      }
+      return null;
+    }})
     .toJSON();
 
   expect(tree).toMatchSnapshot();
