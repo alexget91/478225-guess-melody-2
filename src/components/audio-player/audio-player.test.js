@@ -8,7 +8,15 @@ it(`Audio player correctly renders after relaunch`, () => {
       src={``}
       isPlaying={false}
       onPlayButtonClick={jest.fn()}
-    />)
+    />,
+    {createNodeMock(element) {
+      if (element.type === `audio`) {
+        return {
+          createRef() {}
+        };
+      }
+      return null;
+    }})
     .toJSON();
 
   expect(tree).toMatchSnapshot();
