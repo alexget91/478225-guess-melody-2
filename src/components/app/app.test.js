@@ -23,6 +23,8 @@ describe(`App correctly renders after relaunch`, () => {
         ]}
         onUserAnswer={jest.fn()}
         onWelcomeScreenClick={jest.fn()}
+        onTimeChange={jest.fn()}
+        onTimeIsUp={jest.fn()}
       />)
       .toJSON();
 
@@ -48,6 +50,8 @@ describe(`App correctly renders after relaunch`, () => {
         ]}
         onUserAnswer={jest.fn()}
         onWelcomeScreenClick={jest.fn()}
+        onTimeChange={jest.fn()}
+        onTimeIsUp={jest.fn()}
       />, createAudioMock())
       .toJSON();
 
@@ -76,6 +80,8 @@ describe(`App correctly renders after relaunch`, () => {
         ]}
         onUserAnswer={jest.fn()}
         onWelcomeScreenClick={jest.fn()}
+        onTimeChange={jest.fn()}
+        onTimeIsUp={jest.fn()}
       />, createAudioMock())
       .toJSON();
 

@@ -7,30 +7,40 @@ import {artistQuestion, genreQuestion} from "../../common/global-prop-types";
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
 import GameScreen from "../game-screen/game-screen";
+import FailScreen from "../fail-screen/fail-screen";
 
 class App extends PureComponent {
   static getScreen(props) {
     const {step} = props;
 
-    if (step === -1) {
-      const {
-        gameTime,
-        maxMistakes,
-        onWelcomeScreenClick
-      } = props;
+    switch (step) {
+      case -1:
+        const {
+          gameTime,
+          maxMistakes,
+          onWelcomeScreenClick
+        } = props;
 
-      return <WelcomeScreen
-        time={gameTime}
-        errorCount={maxMistakes}
-        onStartButtonClick={onWelcomeScreenClick}
-      />;
+        return <WelcomeScreen
+          time={gameTime / 60}
+          errorCount={maxMistakes}
+          onStartButtonClick={onWelcomeScreenClick}
+        />;
+
+      case -2:
+        return <FailScreen failType={`time`}/>;
+
+      case -3:
+        return <FailScreen failType={`mistakes`}/>;
     }
 
-    const {questions, mistakes, maxMistakes, onUserAnswer} = props;
+    const {questions, mistakes, maxMistakes, onUserAnswer, gameTime, onTimeChange, onTimeIsUp} = props;
     const currentQuestion = questions[step];
 
     switch (currentQuestion.type) {
-      case `genre`: return <GameScreen mistakes={mistakes}>
+      case `genre`: return <GameScreen type={currentQuestion.type} mistakes={mistakes} time={gameTime}
+        onTimeChange={onTimeChange} onTimeIsUp={onTimeIsUp}>
+
         <GenreQuestionScreen
           screenIndex={step}
           question={currentQuestion}
@@ -38,7 +48,9 @@ class App extends PureComponent {
         />
       </GameScreen>;
 
-      case `artist`: return <GameScreen mistakes={mistakes}>
+      case `artist`: return <GameScreen type={currentQuestion.type} mistakes={mistakes} time={gameTime}
+        onTimeChange={onTimeChange} onTimeIsUp={onTimeIsUp}>
+
         <ArtistQuestionScreen
           screenIndex={step}
           question={currentQuestion}
@@ -66,11 +78,14 @@ App.propTypes = {
   step: PropTypes.number.isRequired,
   onUserAnswer: PropTypes.func.isRequired,
   onWelcomeScreenClick: PropTypes.func.isRequired,
+  onTimeChange: PropTypes.func.isRequired,
+  onTimeIsUp: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: state.step,
   mistakes: state.mistakes,
+  gameTime: state.time,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -79,7 +94,10 @@ const mapDispatchToProps = (dispatch) => ({
   onUserAnswer: (userAnswer, question, mistakes, maxMistakes) => {
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistakes(userAnswer, question, mistakes, maxMistakes));
-  }
+  },
+
+  onTimeChange: () => dispatch(ActionCreator.decrementTime()),
+  onTimeIsUp: () => dispatch(ActionCreator.showFailScreen(`time`)),
 });
 
 export {App};

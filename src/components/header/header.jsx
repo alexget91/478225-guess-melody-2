@@ -1,9 +1,10 @@
 import React from "react";
 import Mistakes from "../mistakes/mistakes";
 import PropTypes from "prop-types";
+import Timer from "../timer/timer";
 
 const Header = (props) => {
-  const {mistakes} = props;
+  const {mistakes, time, onTimeChange, onTimeIsUp} = props;
 
   return <header className="game__header">
     <a className="game__back" href="#">
@@ -11,23 +12,16 @@ const Header = (props) => {
       <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
     </a>
 
-    <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-      <circle className="timer__line" cx="390" cy="390" r="370"
-        style={{filter: `url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center`}}/>
-    </svg>
-
-    <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-      <span className="timer__mins">05</span>
-      <span className="timer__dots">:</span>
-      <span className="timer__secs">00</span>
-    </div>
-
+    <Timer time={time} onTimeChange={onTimeChange} onTimeIsUp={onTimeIsUp}/>
     <Mistakes count={mistakes}/>
   </header>;
 };
 
 Header.propTypes = {
-  mistakes: PropTypes.number
+  mistakes: PropTypes.number,
+  time: PropTypes.number.isRequired,
+  onTimeChange: PropTypes.func.isRequired,
+  onTimeIsUp: PropTypes.func.isRequired,
 };
 
 export default Header;

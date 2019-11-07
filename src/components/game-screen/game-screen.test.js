@@ -8,7 +8,9 @@ import ArtistQuestionScreen from "../artist-question-screen/artist-question-scre
 describe(`Game screen correctly renders after relaunch`, () => {
   it(`Genre question`, () => {
     const tree = renderer
-      .create(<GameScreen mistakes={1}>
+      .create(<GameScreen type={`genre`} mistakes={1} time={0}
+        onTimeChange={jest.fn()} onTimeIsUp={jest.fn()}>
+
         <GenreQuestionScreen
           screenIndex={0}
           question={{
@@ -29,7 +31,9 @@ describe(`Game screen correctly renders after relaunch`, () => {
 
   it(`Artist question`, () => {
     const tree = renderer
-      .create(<GameScreen mistakes={1}>
+      .create(<GameScreen type={`artist`} mistakes={1} time={0}
+        onTimeChange={jest.fn()} onTimeIsUp={jest.fn()}>
+
         <ArtistQuestionScreen
           screenIndex={0}
           question={{
