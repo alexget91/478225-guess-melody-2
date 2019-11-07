@@ -31,7 +31,7 @@ const questions = [
       },
       {
         src: `https://upload.wikimedia.org/wikipedia/commons/7/74/L%27Aube_Nouvelle.ogg`,
-        genre: `pop`,
+        genre: `folk`,
       },
       {
         src: `https://upload.wikimedia.org/wikipedia/commons/c/cb/United_States_Navy_Band_-_Fatshe_leno_la_rona.ogg`,

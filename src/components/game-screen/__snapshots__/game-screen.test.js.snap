@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App correctly renders after relaunch Artist question screen 1`] = `
+exports[`Game screen correctly renders after relaunch Artist question 1`] = `
 <section
   className="game game--genre"
 >
@@ -62,7 +62,9 @@ exports[`App correctly renders after relaunch Artist question screen 1`] = `
     <div
       className="game__mistakes"
     >
-      
+      <div
+        className="wrong"
+      />
     </div>
   </header>
   <section
@@ -123,7 +125,7 @@ exports[`App correctly renders after relaunch Artist question screen 1`] = `
 </section>
 `;
 
-exports[`App correctly renders after relaunch Genre question screen 1`] = `
+exports[`Game screen correctly renders after relaunch Genre question 1`] = `
 <section
   className="game game--genre"
 >
@@ -185,7 +187,9 @@ exports[`App correctly renders after relaunch Genre question screen 1`] = `
     <div
       className="game__mistakes"
     >
-      
+      <div
+        className="wrong"
+      />
     </div>
   </header>
   <section
@@ -243,61 +247,5 @@ exports[`App correctly renders after relaunch Genre question screen 1`] = `
       </button>
     </form>
   </section>
-</section>
-`;
-
-exports[`App correctly renders after relaunch Welcome screen 1`] = `
-<section
-  className="welcome"
->
-  <div
-    className="welcome__logo"
-  >
-    <img
-      alt="Угадай мелодию"
-      height="83"
-      src="img/melody-logo.png"
-      width="186"
-    />
-  </div>
-  <button
-    className="welcome__button js-game-start"
-    onClick={[MockFunction]}
-  >
-    <span
-      className="visually-hidden"
-    >
-      Начать игру
-    </span>
-  </button>
-  <h2
-    className="welcome__rules-title"
-  >
-    Правила игры
-  </h2>
-  <p
-    className="welcome__text"
-  >
-    Правила просты:
-  </p>
-  <ul
-    className="welcome__rules-list"
-  >
-    <li>
-      За 
-      0
-       минут нужно ответить на все вопросы.
-    </li>
-    <li>
-      Можно допустить 
-      0
-       ошибки.
-    </li>
-  </ul>
-  <p
-    className="welcome__text"
-  >
-    Удачи!
-  </p>
 </section>
 `;

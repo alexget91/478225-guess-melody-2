@@ -17,16 +17,14 @@ describe(`Artist question screen`, () => {
           src: ``,
         },
         answers: [{
-          artist: ``,
+          artist: `1`,
           picture: ``,
         }]
       }}
       onAnswer={onUserAnswer}
     />);
 
-    genreQuestionScreen.find(`.js-answer-form`).simulate(`change`, {
-      target: {value: `1`},
-    });
+    genreQuestionScreen.find(`.js-answer-input`).simulate(`change`);
 
     expect(onUserAnswer).toHaveBeenCalledTimes(1);
     expect(onUserAnswer).toHaveBeenCalledWith(`1`);

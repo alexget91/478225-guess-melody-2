@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 import ArtistQuestionScreen from "./artist-question-screen";
+import createAudioMock from "../../common/test-stubs";
 
 it(`Artist question screen correctly renders after relaunch`, () => {
   const tree = renderer
@@ -18,15 +19,7 @@ it(`Artist question screen correctly renders after relaunch`, () => {
         }],
       }}
       onAnswer={jest.fn()}
-    />,
-    {createNodeMock(element) {
-      if (element.type === `audio`) {
-        return {
-          createRef() {}
-        };
-      }
-      return null;
-    }})
+    />, createAudioMock())
     .toJSON();
 
   expect(tree).toMatchSnapshot();

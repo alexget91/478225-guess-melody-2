@@ -26,6 +26,6 @@ describe(`Genre question screen`, () => {
     });
 
     expect(onUserAnswer).toHaveBeenCalledTimes(1);
-    expect(onUserAnswer).toHaveBeenCalledWith([]);
+    expect(onUserAnswer).toHaveBeenCalledWith([false]);
   });
 });
