@@ -1,6 +1,7 @@
 import React from "react";
 import AudioPlayer from "./audio-player";
 import renderer from "react-test-renderer";
+import createAudioMock from "../../common/test-stubs";
 
 it(`Audio player correctly renders after relaunch`, () => {
   const tree = renderer
@@ -8,15 +9,7 @@ it(`Audio player correctly renders after relaunch`, () => {
       src={``}
       isPlaying={false}
       onPlayButtonClick={jest.fn()}
-    />,
-    {createNodeMock(element) {
-      if (element.type === `audio`) {
-        return {
-          createRef() {}
-        };
-      }
-      return null;
-    }})
+    />, createAudioMock())
     .toJSON();
 
   expect(tree).toMatchSnapshot();

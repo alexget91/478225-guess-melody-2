@@ -1,5 +1,5 @@
 const settings = {
-  gameTime: 5,
+  gameTime: 300, // seconds
   errorCount: 3,
 };
 
