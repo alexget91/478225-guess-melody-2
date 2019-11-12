@@ -2,7 +2,6 @@ import React from "react";
 import renderer from "react-test-renderer";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import GameScreen from "./game-screen";
-import createAudioMock from "../../common/test-stubs";
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 
 describe(`Game screen correctly renders after relaunch`, () => {
@@ -21,9 +20,12 @@ describe(`Game screen correctly renders after relaunch`, () => {
               src: ``,
             }],
           }}
-          onAnswer={jest.fn()}
+          userAnswer={[]}
+          renderPlayer={jest.fn()}
+          onAnswerChange={jest.fn()}
+          onAnswerSubmit={jest.fn()}
         />
-      </GameScreen>, createAudioMock())
+      </GameScreen>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();
@@ -48,8 +50,9 @@ describe(`Game screen correctly renders after relaunch`, () => {
             }],
           }}
           onAnswer={jest.fn()}
+          renderPlayer={jest.fn()}
         />
-      </GameScreen>, createAudioMock())
+      </GameScreen>)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

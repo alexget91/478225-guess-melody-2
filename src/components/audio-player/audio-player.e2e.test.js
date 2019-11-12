@@ -5,32 +5,19 @@ import AudioPlayer from "./audio-player";
 
 Enzyme.configure({adapter: new Adapter()});
 
-describe(`State changes correctly`, () => {
-  const pauseStub = jest
-    .spyOn(window.HTMLMediaElement.prototype, `pause`)
-    .mockImplementation(() => {});
-
+it(`Clicking on a play/pause button calls callback`, () => {
+  const playClickHandler = jest.fn();
   const audioPlayer = mount(<AudioPlayer
     src={``}
+    isLoading={false}
     isPlaying={false}
-    onPlayButtonClick={jest.fn()}
+    renderAudio={jest.fn()}
+    onPlayButtonClick={playClickHandler}
   />);
 
   const playButton = audioPlayer.find(`.js-track-button`);
+  expect(playButton.length).toBe(1);
 
-  audioPlayer.setState({isLoading: false});
-
-  it(`When "Play" button clicked`, () => {
-    expect(playButton.length).toBe(1);
-    playButton.simulate(`click`);
-    expect(pauseStub).toHaveBeenCalled();
-    expect(audioPlayer.state(`isPlaying`)).toBe(true);
-  });
-
-  it(`When "Pause" button clicked`, () => {
-    expect(playButton.length).toBe(1);
-    playButton.simulate(`click`);
-    expect(pauseStub).toHaveBeenCalled();
-    expect(audioPlayer.state(`isPlaying`)).toBe(false);
-  });
+  playButton.simulate(`click`);
+  expect(playClickHandler).toHaveBeenCalledTimes(1);
 });

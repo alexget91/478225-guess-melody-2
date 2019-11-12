@@ -18,25 +18,15 @@ exports[`Genre question screen correctly renders after relaunch 1`] = `
     <div
       className="track"
     >
-      <button
-        className="track__button track__button--play js-track-button"
-        disabled={true}
-        onClick={[Function]}
-        type="button"
-      />
-      <div
-        className="track__status"
-      >
-        <audio />
-      </div>
       <div
         className="game__answer"
       >
         <input
           className="game__input visually-hidden"
+          data-index={0}
           id="answer-0"
           name="answer"
-          onChange={[Function]}
+          onChange={[MockFunction]}
           type="checkbox"
           value="answer-0"
         />

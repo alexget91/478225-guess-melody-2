@@ -22,9 +22,17 @@ describe(`Artist question screen`, () => {
         }]
       }}
       onAnswer={onUserAnswer}
+      renderPlayer={jest.fn()}
+      onScreenChange={jest.fn()}
     />);
 
-    genreQuestionScreen.find(`.js-answer-input`).simulate(`change`);
+    genreQuestionScreen.find(`.js-answer-input`).simulate(`change`, {
+      currentTarget: {
+        dataset: {
+          index: 0
+        }
+      }
+    });
 
     expect(onUserAnswer).toHaveBeenCalledTimes(1);
     expect(onUserAnswer).toHaveBeenCalledWith(`1`);
