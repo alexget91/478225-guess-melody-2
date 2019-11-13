@@ -9,7 +9,10 @@ import {Provider} from "react-redux";
 
 const init = (gameQuestions, {errorCount, gameTime}) => {
   ReactDOM.render(
-      <Provider store={createStore(reducer)}>
+      <Provider store={createStore(
+          reducer,
+          window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f
+      )}>
         <App
           maxMistakes={errorCount}
           gameTime={gameTime}

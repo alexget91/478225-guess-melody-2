@@ -1,27 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {genreQuestion} from "../../common/global-prop-types";
-import AudioPlayer from "../audio-player/audio-player";
-
-const DEFAULT_ACTIVE_PLAYER = -1;
 
 class GenreQuestionScreen extends React.PureComponent {
-  get defaultState() {
-    return {
-      activePlayer: DEFAULT_ACTIVE_PLAYER,
-      userAnswer: new Array(this.props.question.answers.length).fill(false)
-    };
-  }
-
   constructor(props) {
     super(props);
 
-    this.state = this.defaultState;
     this._answerSubmitHandler = this._answerSubmitHandler.bind(this);
   }
 
   render() {
-    const {question, screenIndex} = this.props;
+    const {question, screenIndex, userAnswer, renderPlayer, onAnswerChange} = this.props;
     const {
       answers,
       genre,
@@ -34,21 +23,11 @@ class GenreQuestionScreen extends React.PureComponent {
           {answers.map((it, i) => {
             return (
               <div key={`${screenIndex}-answer-${i}`} className="track">
-                <AudioPlayer
-                  src={it.src}
-                  isPlaying={i === this.state.activePlayer}
-                  onPlayButtonClick={() => this.setState({
-                    activePlayer: this.state.activePlayer === i ? -1 : i
-                  })}
-                />
+                {renderPlayer(it, i)}
                 <div className="game__answer">
                   <input className="game__input visually-hidden" type="checkbox" name="answer"
-                    value={`answer-${i}`} id={`answer-${i}`}
-                    onChange={() => {
-                      const userAnswer = [...this.state.userAnswer];
-                      userAnswer[i] = !userAnswer[i];
-                      this.setState({userAnswer});
-                    }}
+                    value={`answer-${i}`} id={`answer-${i}`} data-index={i}
+                    onChange={onAnswerChange} checked={userAnswer[i]}
                   />
                   <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
                 </div>
@@ -63,15 +42,20 @@ class GenreQuestionScreen extends React.PureComponent {
 
   _answerSubmitHandler(evt) {
     evt.preventDefault();
-    this.props.onAnswer(this.state.userAnswer);
-    this.setState(this.defaultState);
+
+    this.props.onAnswerSubmit();
+    this.props.onScreenChange();
   }
 }
 
 GenreQuestionScreen.propTypes = {
   question: PropTypes.exact(genreQuestion).isRequired,
   screenIndex: PropTypes.number.isRequired,
-  onAnswer: PropTypes.func.isRequired
+  userAnswer: PropTypes.arrayOf(PropTypes.bool).isRequired,
+  renderPlayer: PropTypes.func.isRequired,
+  onAnswerChange: PropTypes.func.isRequired,
+  onAnswerSubmit: PropTypes.func.isRequired,
+  onScreenChange: PropTypes.func,
 };
 
 export default GenreQuestionScreen;

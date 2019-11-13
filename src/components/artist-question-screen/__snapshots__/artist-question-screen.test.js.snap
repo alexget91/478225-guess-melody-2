@@ -14,19 +14,7 @@ exports[`Artist question screen correctly renders after relaunch 1`] = `
   >
     <div
       className="track"
-    >
-      <button
-        className="track__button track__button--play js-track-button"
-        disabled={true}
-        onClick={[Function]}
-        type="button"
-      />
-      <div
-        className="track__status"
-      >
-        <audio />
-      </div>
-    </div>
+    />
   </div>
   <form
     className="game__artist"
@@ -36,6 +24,7 @@ exports[`Artist question screen correctly renders after relaunch 1`] = `
     >
       <input
         className="artist__input visually-hidden js-answer-input"
+        data-index={0}
         id="answer-0"
         name="answer"
         onChange={[Function]}

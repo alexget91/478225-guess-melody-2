@@ -6,7 +6,7 @@ import GenreQuestionScreen from "./genre-question-screen";
 Enzyme.configure({adapter: new Adapter()});
 
 describe(`Genre question screen`, () => {
-  it(`When the user answers, the callback function gets the data in the correct format`, () => {
+  it(`Submitting answer form calls callback`, () => {
     const onUserAnswer = jest.fn();
     const genreQuestionScreen = shallow(<GenreQuestionScreen
       screenIndex={0}
@@ -18,7 +18,11 @@ describe(`Genre question screen`, () => {
           src: ``,
         }],
       }}
-      onAnswer={onUserAnswer}
+      userAnswer={[]}
+      renderPlayer={jest.fn()}
+      onAnswerChange={jest.fn()}
+      onAnswerSubmit={onUserAnswer}
+      onScreenChange={jest.fn()}
     />);
 
     genreQuestionScreen.find(`.js-answer-form`).simulate(`submit`, {
@@ -26,6 +30,5 @@ describe(`Genre question screen`, () => {
     });
 
     expect(onUserAnswer).toHaveBeenCalledTimes(1);
-    expect(onUserAnswer).toHaveBeenCalledWith([false]);
   });
 });

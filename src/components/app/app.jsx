@@ -1,4 +1,4 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import WelcomeScreen from "../welcome-screen/welcome-screen";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
@@ -8,64 +8,64 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer";
 import GameScreen from "../game-screen/game-screen";
 import FailScreen from "../fail-screen/fail-screen";
+import withActivePlayer from "../../hocs/with-active-player/with-active-player";
+import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 
-class App extends PureComponent {
-  static getScreen(props) {
-    const {step} = props;
+const GenreQuestionScreenWrapped = withUserAnswer(withActivePlayer(GenreQuestionScreen));
+const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
-    switch (step) {
-      case -1:
-        const {
-          gameTime,
-          maxMistakes,
-          onWelcomeScreenClick
-        } = props;
+const App = (props) => {
+  const {step} = props;
 
-        return <WelcomeScreen
-          time={gameTime / 60}
-          errorCount={maxMistakes}
-          onStartButtonClick={onWelcomeScreenClick}
-        />;
+  switch (step) {
+    case -1:
+      const {
+        gameTime,
+        maxMistakes,
+        onWelcomeScreenClick
+      } = props;
 
-      case -2:
-        return <FailScreen failType={`time`}/>;
+      return <WelcomeScreen
+        time={gameTime / 60}
+        errorCount={maxMistakes}
+        onStartButtonClick={onWelcomeScreenClick}
+      />;
 
-      case -3:
-        return <FailScreen failType={`mistakes`}/>;
-    }
+    case -2:
+      return <FailScreen failType={`time`}/>;
 
-    const {questions, mistakes, maxMistakes, onUserAnswer, gameTime, onTimeChange, onTimeIsUp} = props;
-    const currentQuestion = questions[step];
-
-    switch (currentQuestion.type) {
-      case `genre`: return <GameScreen type={currentQuestion.type} mistakes={mistakes} time={gameTime}
-        onTimeChange={onTimeChange} onTimeIsUp={onTimeIsUp}>
-
-        <GenreQuestionScreen
-          screenIndex={step}
-          question={currentQuestion}
-          onAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
-        />
-      </GameScreen>;
-
-      case `artist`: return <GameScreen type={currentQuestion.type} mistakes={mistakes} time={gameTime}
-        onTimeChange={onTimeChange} onTimeIsUp={onTimeIsUp}>
-
-        <ArtistQuestionScreen
-          screenIndex={step}
-          question={currentQuestion}
-          onAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
-        />
-      </GameScreen>;
-    }
-
-    return null;
+    case -3:
+      return <FailScreen failType={`mistakes`}/>;
   }
 
-  render() {
-    return App.getScreen(this.props);
+  const {questions, mistakes, maxMistakes, onUserAnswer, gameTime, onTimeChange, onTimeIsUp} = props;
+  const currentQuestion = questions[step];
+
+  switch (currentQuestion.type) {
+    case `genre`: return <GameScreen type={currentQuestion.type} mistakes={mistakes} time={gameTime}
+      onTimeChange={onTimeChange} onTimeIsUp={onTimeIsUp}>
+
+      <GenreQuestionScreenWrapped
+        screenIndex={step}
+        question={currentQuestion}
+        answersLength={currentQuestion.answers.length}
+        onAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
+      />
+    </GameScreen>;
+
+    case `artist`: return <GameScreen type={currentQuestion.type} mistakes={mistakes} time={gameTime}
+      onTimeChange={onTimeChange} onTimeIsUp={onTimeIsUp}>
+
+      <ArtistQuestionScreenWrapped
+        screenIndex={step}
+        question={currentQuestion}
+        onAnswer={(userAnswer) => onUserAnswer(userAnswer, currentQuestion, mistakes, maxMistakes)}
+      />
+    </GameScreen>;
   }
-}
+
+  return null;
+};
 
 App.propTypes = {
   mistakes: PropTypes.number.isRequired,

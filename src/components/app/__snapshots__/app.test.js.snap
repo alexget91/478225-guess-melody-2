@@ -100,6 +100,7 @@ exports[`App correctly renders after relaunch Artist question screen 1`] = `
       >
         <input
           className="artist__input visually-hidden js-answer-input"
+          data-index={0}
           id="answer-0"
           name="answer"
           onChange={[Function]}
@@ -220,7 +221,9 @@ exports[`App correctly renders after relaunch Genre question screen 1`] = `
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
+            data-index={0}
             id="answer-0"
             name="answer"
             onChange={[Function]}
