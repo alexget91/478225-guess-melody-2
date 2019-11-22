@@ -1,8 +1,12 @@
-import settings from "./mocks/settings";
+import settings from "../mocks/settings";
 
-const FAIL_SCREEN_STEPS = {
-  time: -2,
-  mistakes: -3,
+const ActionTypes = {
+  SET_QUESTIONS: `SET_QUESTIONS`,
+  INCREMENT_STEP: `INCREMENT_STEP`,
+  SET_STEP: `SET_STEP`,
+  INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
+  DECREMENT_TIME: `DECREMENT_TIME`,
+  RESET: `RESET`,
 };
 
 const isArtistAnswerCorrect = (userAnswer, question) =>
@@ -14,8 +18,13 @@ const isGenreAnswerCorrect = (userAnswer, question) =>
   ));
 
 const ActionCreator = {
+  setQuestions: (questions) => ({
+    type: ActionTypes.SET_QUESTIONS,
+    payload: questions
+  }),
+
   incrementStep: () => ({
-    type: `INCREMENT_STEP`,
+    type: ActionTypes.INCREMENT_STEP,
     payload: 1
   }),
 
@@ -33,30 +42,31 @@ const ActionCreator = {
 
     if (!answerIsCorrect && mistakes + 1 >= maxMistakes) {
       return {
-        type: `RESET`
+        type: ActionTypes.RESET
       };
     }
 
     return {
-      type: `INCREMENT_MISTAKES`,
+      type: ActionTypes.INCREMENT_MISTAKES,
       payload: answerIsCorrect ? 0 : 1
     };
   },
 
   decrementTime: () => ({
-    type: `DECREMENT_TIME`,
+    type: ActionTypes.DECREMENT_TIME,
     payload: 1
   }),
 
-  showFailScreen: (type) => ({
-    type: `SET_STEP`,
-    payload: FAIL_SCREEN_STEPS[type]
+  setStep: (step) => ({
+    type: ActionTypes.SET_STEP,
+    payload: step
   }),
 
-  reset: () => ({type: `RESET`})
+  reset: () => ({type: ActionTypes.RESET})
 };
 
 const initialState = {
+  questions: [],
   step: -1,
   mistakes: 0,
   time: settings.gameTime
@@ -64,27 +74,33 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case `INCREMENT_STEP`:
+    case ActionTypes.SET_QUESTIONS:
+      return Object.assign({}, state, {
+        questions: action.payload
+      });
+    case ActionTypes.INCREMENT_STEP:
       return Object.assign({}, state, {
         step: state.step + action.payload
       });
-    case `SET_STEP`:
+    case ActionTypes.SET_STEP:
       return Object.assign({}, state, {
         step: action.payload
       });
-    case `INCREMENT_MISTAKES`:
+    case ActionTypes.INCREMENT_MISTAKES:
       return Object.assign({}, state, {
         mistakes: state.mistakes + action.payload
       });
-    case `DECREMENT_TIME`:
+    case ActionTypes.DECREMENT_TIME:
       return Object.assign({}, state, {
         time: state.time - action.payload
       });
-    case `RESET`:
-      return Object.assign({}, initialState);
+    case ActionTypes.RESET:
+      return Object.assign({}, initialState, {
+        questions: state.questions
+      });
   }
 
   return state;
 };
 
-export {ActionCreator, reducer, isArtistAnswerCorrect, isGenreAnswerCorrect};
+export {ActionTypes, ActionCreator, reducer, isArtistAnswerCorrect, isGenreAnswerCorrect};

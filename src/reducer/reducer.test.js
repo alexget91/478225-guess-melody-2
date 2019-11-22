@@ -1,4 +1,5 @@
-import {ActionCreator, isArtistAnswerCorrect, isGenreAnswerCorrect, reducer} from "./reducer";
+import {ActionCreator, ActionTypes, isArtistAnswerCorrect, isGenreAnswerCorrect, reducer} from "./reducer";
+import {ScreenSteps} from "../common/constants";
 
 describe(`Business logic is correct`, () => {
   it(`Artist answer is checked correctly`, () => {
@@ -99,7 +100,7 @@ describe(`Business logic is correct`, () => {
 describe(`Action creators works correctly`, () => {
   it(`Action creator for incrementing step returns correct action`, () => {
     expect(ActionCreator.incrementStep()).toEqual({
-      type: `INCREMENT_STEP`,
+      type: ActionTypes.INCREMENT_STEP,
       payload: 1
     });
   });
@@ -127,7 +128,7 @@ describe(`Action creators works correctly`, () => {
             }
           ]
         }, 0, Infinity)).toEqual({
-      type: `INCREMENT_MISTAKES`,
+      type: ActionTypes.INCREMENT_MISTAKES,
       payload: 0
     });
   });
@@ -158,7 +159,7 @@ describe(`Action creators works correctly`, () => {
         }
       ]
     }, 0, Infinity)).toEqual({
-      type: `INCREMENT_MISTAKES`,
+      type: ActionTypes.INCREMENT_MISTAKES,
       payload: 1
     });
   });
@@ -187,7 +188,7 @@ describe(`Action creators works correctly`, () => {
             },
           ]
         }, 0, Infinity)).toEqual({
-      type: `INCREMENT_MISTAKES`,
+      type: ActionTypes.INCREMENT_MISTAKES,
       payload: 0
     });
   });
@@ -216,7 +217,7 @@ describe(`Action creators works correctly`, () => {
             },
           ]
         }, 0, Infinity)).toEqual({
-      type: `INCREMENT_MISTAKES`,
+      type: ActionTypes.INCREMENT_MISTAKES,
       payload: 1
     });
   });
@@ -247,7 +248,7 @@ describe(`Action creators works correctly`, () => {
         }
       ]
     }, Infinity, 0)).toEqual({
-      type: `RESET`
+      type: ActionTypes.RESET
     });
 
     expect(ActionCreator.incrementMistakes([false, true, true, false],
@@ -273,87 +274,104 @@ describe(`Action creators works correctly`, () => {
             },
           ]
         }, Infinity, 0)).toEqual({
-      type: `RESET`
+      type: ActionTypes.RESET
+    });
+  });
+
+  it(`Action creator for decrement time returns correct action`, () => {
+    expect(ActionCreator.decrementTime()).toEqual({
+      type: ActionTypes.DECREMENT_TIME,
+      payload: 1
+    });
+  });
+
+  it(`Action creator for set step returns correct action for type "START"`, () => {
+    expect(ActionCreator.setStep(ScreenSteps.START)).toEqual({
+      type: ActionTypes.SET_STEP,
+      payload: ScreenSteps.START
+    });
+  });
+
+  it(`Action creator for set step returns correct action for type "FAIL_TIME"`, () => {
+    expect(ActionCreator.setStep(ScreenSteps.FAIL_TIME)).toEqual({
+      type: ActionTypes.SET_STEP,
+      payload: ScreenSteps.FAIL_TIME
+    });
+  });
+
+  it(`Action creator for set step returns correct action for type "FAIL_MISTAKES"`, () => {
+    expect(ActionCreator.setStep(ScreenSteps.FAIL_MISTAKES)).toEqual({
+      type: ActionTypes.SET_STEP,
+      payload: ScreenSteps.FAIL_MISTAKES
+    });
+  });
+
+  it(`Action creator for reset returns correct action`, () => {
+    expect(ActionCreator.reset()).toEqual({
+      type: ActionTypes.RESET,
     });
   });
 });
 
 describe(`Reducer works correctly`, () => {
+  const initialState = {
+    questions: [],
+    step: -1,
+    mistakes: 0,
+    time: 300
+  };
+
   it(`Reducer without additional parameters should return initial state`, () => {
-    expect(reducer(undefined, {})).toEqual({
-      step: -1,
-      mistakes: 0,
-      time: 300
-    });
+    expect(reducer(undefined, {})).toEqual(initialState);
+  });
+
+  it(`Reducer should set given value as a questions`, () => {
+    expect(reducer(initialState, {
+      type: ActionTypes.SET_QUESTIONS,
+      payload: [{foo: `bar`}]
+    })).toEqual(Object.assign({}, initialState, {
+      questions: [{foo: `bar`}],
+    }));
   });
 
   it(`Reducer should increment current step by a given value`, () => {
-    expect(reducer({
-      step: -1,
-      mistakes: 0,
-      time: 300
-    }, {
-      type: `INCREMENT_STEP`,
+    expect(reducer(initialState, {
+      type: ActionTypes.INCREMENT_STEP,
       payload: 1
-    })).toEqual({
+    })).toEqual(Object.assign({}, initialState, {
       step: 0,
-      mistakes: 0,
-      time: 300
-    });
+    }));
 
-    expect(reducer({
-      step: -1,
-      mistakes: 0,
-      time: 300
-    }, {
-      type: `INCREMENT_STEP`,
+    expect(reducer(initialState, {
+      type: ActionTypes.INCREMENT_STEP,
       payload: 0
-    })).toEqual({
-      step: -1,
-      mistakes: 0,
-      time: 300
-    });
+    })).toEqual(Object.assign({}, initialState));
   });
 
   it(`Reducer should increment number of mistakes by a given value`, () => {
-    expect(reducer({
-      step: -1,
-      mistakes: 0,
-      time: 300
-    }, {
-      type: `INCREMENT_MISTAKES`,
+    expect(reducer(initialState, {
+      type: ActionTypes.INCREMENT_MISTAKES,
       payload: 1
-    })).toEqual({
-      step: -1,
+    })).toEqual(Object.assign({}, initialState, {
       mistakes: 1,
-      time: 300
-    });
+    }));
 
-    expect(reducer({
-      step: -1,
-      mistakes: 0,
-      time: 300
-    }, {
-      type: `INCREMENT_MISTAKES`,
+    expect(reducer(initialState, {
+      type: ActionTypes.INCREMENT_MISTAKES,
       payload: 0
-    })).toEqual({
-      step: -1,
-      mistakes: 0,
-      time: 300
-    });
+    })).toEqual(Object.assign({}, initialState));
   });
 
-  it(`Reducer should correctly reset application state`, () => {
+  it(`Reducer should correctly reset application state (not reset questions)`, () => {
     expect(reducer({
+      questions: [{foo: `bar`}],
       step: 100,
       mistakes: 20,
       time: 300
     }, {
-      type: `RESET`
-    })).toEqual({
-      step: -1,
-      mistakes: 0,
-      time: 300
-    });
+      type: ActionTypes.RESET
+    })).toEqual(Object.assign({}, initialState, {
+      questions: [{foo: `bar`}]
+    }));
   });
 });
