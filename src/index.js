@@ -8,7 +8,7 @@ import {Provider} from "react-redux";
 import configureAPI from "./api";
 import {compose} from "recompose";
 import thunk from "redux-thunk";
-import Operation from "./reducer/operation/operation";
+import Operation from "./reducer/data/operation/operation";
 
 const init = ({errorCount, gameTime}) => {
   const api = configureAPI((...args) => store.dispatch(...args));

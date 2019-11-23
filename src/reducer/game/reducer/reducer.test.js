@@ -1,5 +1,5 @@
-import {ActionCreator, ActionTypes, isArtistAnswerCorrect, isGenreAnswerCorrect, reducer} from "./game";
-import {ScreenSteps} from "../../common/constants";
+import {ActionCreator, ActionTypes, isArtistAnswerCorrect, isGenreAnswerCorrect, reducer} from "./reducer";
+import {ScreenSteps} from "../../../common/constants";
 
 describe(`Business logic is correct`, () => {
   it(`Artist answer is checked correctly`, () => {

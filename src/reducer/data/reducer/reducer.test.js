@@ -1,4 +1,4 @@
-import {ActionTypes, ActionCreator, reducer} from "./data";
+import {ActionTypes, ActionCreator, reducer} from "./reducer";
 
 describe(`Action creators works correctly`, () => {
   it(`Action creator for set questions returns correct action`, () => {

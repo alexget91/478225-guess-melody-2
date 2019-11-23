@@ -5,13 +5,14 @@ import GenreQuestionScreen from "../genre-question-screen/genre-question-screen"
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import {artistQuestion, genreQuestion} from "../../common/global-prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/game/game";
+import {ActionCreator} from "../../reducer/game/reducer/reducer";
 import GameScreen from "../game-screen/game-screen";
 import FailScreen from "../fail-screen/fail-screen";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 import {ScreenSteps} from "../../common/constants";
-import NameSpace from "../../reducer/name-spaces";
+import {getMistakes, getStep, getTime} from "../../reducer/game/selectors/selectors";
+import {getQuestions} from "../../reducer/data/selectors/selectors";
 
 const GenreQuestionScreenWrapped = withUserAnswer(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
@@ -85,10 +86,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  questions: state[NameSpace.DATA].questions,
-  step: state[NameSpace.GAME].step,
-  mistakes: state[NameSpace.GAME].mistakes,
-  gameTime: state[NameSpace.GAME].time,
+  questions: getQuestions(state),
+  step: getStep(state),
+  mistakes: getMistakes(state),
+  gameTime: getTime(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -1,4 +1,10 @@
-import settings from "../../mocks/settings";
+import settings from "../../../mocks/settings";
+
+const initialState = {
+  step: -1,
+  mistakes: 0,
+  time: settings.gameTime
+};
 
 const ActionTypes = {
   INCREMENT_STEP: `INCREMENT_STEP`,
@@ -57,12 +63,6 @@ const ActionCreator = {
   }),
 
   reset: () => ({type: ActionTypes.RESET})
-};
-
-const initialState = {
-  step: -1,
-  mistakes: 0,
-  time: settings.gameTime
 };
 
 const reducer = (state = initialState, action) => {
