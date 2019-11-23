@@ -5,11 +5,14 @@ import GenreQuestionScreen from "../genre-question-screen/genre-question-screen"
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import {artistQuestion, genreQuestion} from "../../common/global-prop-types";
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer";
+import {ActionCreator} from "../../reducer/game/reducer/reducer";
 import GameScreen from "../game-screen/game-screen";
 import FailScreen from "../fail-screen/fail-screen";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
+import {ScreenSteps} from "../../common/constants";
+import {getMistakes, getStep, getTime} from "../../reducer/game/selectors/selectors";
+import {getQuestions} from "../../reducer/data/selectors/selectors";
 
 const GenreQuestionScreenWrapped = withUserAnswer(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
@@ -18,7 +21,7 @@ const App = (props) => {
   const {step} = props;
 
   switch (step) {
-    case -1:
+    case ScreenSteps.START:
       const {
         gameTime,
         maxMistakes,
@@ -31,10 +34,10 @@ const App = (props) => {
         onStartButtonClick={onWelcomeScreenClick}
       />;
 
-    case -2:
+    case ScreenSteps.FAIL_TIME:
       return <FailScreen failType={`time`}/>;
 
-    case -3:
+    case ScreenSteps.FAIL_MISTAKES:
       return <FailScreen failType={`mistakes`}/>;
   }
 
@@ -83,9 +86,10 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  step: state.step,
-  mistakes: state.mistakes,
-  gameTime: state.time,
+  questions: getQuestions(state),
+  step: getStep(state),
+  mistakes: getMistakes(state),
+  gameTime: getTime(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -97,7 +101,7 @@ const mapDispatchToProps = (dispatch) => ({
   },
 
   onTimeChange: () => dispatch(ActionCreator.decrementTime()),
-  onTimeIsUp: () => dispatch(ActionCreator.showFailScreen(`time`)),
+  onTimeIsUp: () => dispatch(ActionCreator.setStep(ScreenSteps.FAIL_TIME)),
 });
 
 export {App};
