@@ -1,4 +1,4 @@
-import {ActionCreator} from "./reducer";
+import {ActionCreator} from "../data/data";
 
 const Operation = {
   loadQuestions: () => (dispatch, _, api) => {

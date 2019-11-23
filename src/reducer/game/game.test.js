@@ -1,5 +1,5 @@
-import {ActionCreator, ActionTypes, isArtistAnswerCorrect, isGenreAnswerCorrect, reducer} from "./reducer";
-import {ScreenSteps} from "../common/constants";
+import {ActionCreator, ActionTypes, isArtistAnswerCorrect, isGenreAnswerCorrect, reducer} from "./game";
+import {ScreenSteps} from "../../common/constants";
 
 describe(`Business logic is correct`, () => {
   it(`Artist answer is checked correctly`, () => {
@@ -315,7 +315,6 @@ describe(`Action creators works correctly`, () => {
 
 describe(`Reducer works correctly`, () => {
   const initialState = {
-    questions: [],
     step: -1,
     mistakes: 0,
     time: 300
@@ -323,15 +322,6 @@ describe(`Reducer works correctly`, () => {
 
   it(`Reducer without additional parameters should return initial state`, () => {
     expect(reducer(undefined, {})).toEqual(initialState);
-  });
-
-  it(`Reducer should set given value as a questions`, () => {
-    expect(reducer(initialState, {
-      type: ActionTypes.SET_QUESTIONS,
-      payload: [{foo: `bar`}]
-    })).toEqual(Object.assign({}, initialState, {
-      questions: [{foo: `bar`}],
-    }));
   });
 
   it(`Reducer should increment current step by a given value`, () => {

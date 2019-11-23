@@ -1,7 +1,7 @@
-import configureAPI from "../api";
+import configureAPI from "../../api";
 import MockAdapter from "axios-mock-adapter";
 import Operation from "./operation";
-import {ActionTypes} from "./reducer";
+import {ActionTypes} from "../data/data";
 
 const api = configureAPI();
 const apiMock = new MockAdapter(api);
