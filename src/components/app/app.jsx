@@ -13,12 +13,15 @@ import withUserAnswer from "../../hocs/with-user-answer/with-user-answer";
 import {ScreenSteps} from "../../common/constants";
 import {getMistakes, getStep, getTime} from "../../reducer/game/selectors/selectors";
 import {getQuestions} from "../../reducer/data/selectors/selectors";
+import AuthorizationScreen from "../authorization-screen/authorization-screen";
+import {getAuthorizationRequired} from "../../reducer/user/selectors/selectors";
+import UserOperation from "../../reducer/user/operation/operation";
 
 const GenreQuestionScreenWrapped = withUserAnswer(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
 const App = (props) => {
-  const {step} = props;
+  const {step, isAuthorizationRequired, onSignIn} = props;
 
   switch (step) {
     case ScreenSteps.START:
@@ -39,6 +42,12 @@ const App = (props) => {
 
     case ScreenSteps.FAIL_MISTAKES:
       return <FailScreen failType={`mistakes`}/>;
+  }
+
+  if (isAuthorizationRequired) {
+    return <AuthorizationScreen
+      onFormSubmit={onSignIn}
+    />;
   }
 
   const {questions, mistakes, maxMistakes, onUserAnswer, gameTime, onTimeChange, onTimeIsUp} = props;
@@ -79,10 +88,12 @@ App.propTypes = {
     PropTypes.exact(artistQuestion),
   ])).isRequired,
   step: PropTypes.number.isRequired,
+  isAuthorizationRequired: PropTypes.bool,
   onUserAnswer: PropTypes.func.isRequired,
   onWelcomeScreenClick: PropTypes.func.isRequired,
   onTimeChange: PropTypes.func.isRequired,
   onTimeIsUp: PropTypes.func.isRequired,
+  onSignIn: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
@@ -90,6 +101,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
   step: getStep(state),
   mistakes: getMistakes(state),
   gameTime: getTime(state),
+  isAuthorizationRequired: getAuthorizationRequired(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -102,6 +114,8 @@ const mapDispatchToProps = (dispatch) => ({
 
   onTimeChange: () => dispatch(ActionCreator.decrementTime()),
   onTimeIsUp: () => dispatch(ActionCreator.setStep(ScreenSteps.FAIL_TIME)),
+
+  onSignIn: (email, password) => dispatch(UserOperation.signIn(email, password)),
 });
 
 export {App};
