@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authorization form correctly renders after relaunch 1`] = `
+<form
+  action=""
+  className="login__form js-login-form"
+  onSubmit={[Function]}
+>
+  <p
+    className="login__field"
+  >
+    <label
+      className="login__label"
+      htmlFor="name"
+    >
+      Логин
+    </label>
+    <input
+      className="login__input js-email-input"
+      id="name"
+      name="name"
+      required={true}
+      type="email"
+    />
+  </p>
+  <p
+    className="login__field"
+  >
+    <label
+      className="login__label"
+      htmlFor="password"
+    >
+      Пароль
+    </label>
+    <input
+      className="login__input js-password-input"
+      id="password"
+      name="password"
+      required={true}
+      type="password"
+    />
+    <span
+      className="login__error"
+    >
+      Неверный пароль
+    </span>
+  </p>
+  <button
+    className="login__button button"
+    type="submit"
+  >
+    Войти
+  </button>
+</form>
+`;

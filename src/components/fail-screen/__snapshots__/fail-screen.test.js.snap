@@ -24,12 +24,13 @@ exports[`Fail screen correctly renders after relaunch Mistakes fail 1`] = `
   >
     У вас закончились все попытки. Ничего, повезёт в следующий раз!
   </p>
-  <button
+  <a
     className="replay"
-    type="button"
+    href="/"
+    onClick={[Function]}
   >
     Попробовать ещё раз
-  </button>
+  </a>
 </section>
 `;
 
@@ -57,11 +58,12 @@ exports[`Fail screen correctly renders after relaunch Time fail 1`] = `
   >
     Время вышло! Вы не успели отгадать все мелодии
   </p>
-  <button
+  <a
     className="replay"
-    type="button"
+    href="/"
+    onClick={[Function]}
   >
     Попробовать ещё раз
-  </button>
+  </a>
 </section>
 `;

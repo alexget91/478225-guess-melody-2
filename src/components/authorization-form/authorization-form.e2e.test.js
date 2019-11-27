@@ -1,21 +1,21 @@
 import React from "react";
 import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import AuthorizationScreen from "./authorization-screen";
+import AuthorizationForm from "./authorization-form";
 
 Enzyme.configure({adapter: new Adapter()});
 
 it(`Authorization form submitting calls callback with correct data`, () => {
   const formSubmitHandler = jest.fn();
-  const signIn = mount(<AuthorizationScreen onFormSubmit={formSubmitHandler}/>);
+  const authScreen = mount(<AuthorizationForm onFormSubmit={formSubmitHandler}/>);
 
-  const loginForm = signIn.find(`.js-login-form`);
+  const loginForm = authScreen.find(`.js-login-form`);
   expect(loginForm.length).toBe(1);
 
-  const emailInput = signIn.find(`.js-email-input`);
+  const emailInput = authScreen.find(`.js-email-input`);
   expect(emailInput.length).toBe(1);
 
-  const passwordInput = signIn.find(`.js-password-input`);
+  const passwordInput = authScreen.find(`.js-password-input`);
   expect(passwordInput.length).toBe(1);
 
   emailInput.instance().value = `mockEmail`;

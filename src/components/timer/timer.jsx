@@ -50,22 +50,19 @@ class Timer extends PureComponent {
   }
 
   _tick() {
-    const {time, onTimeChange, onTimeIsUp} = this.props;
+    const {time, onTimeChange} = this.props;
 
-    if (time > 1) {
-      onTimeChange();
-
-    } else {
+    if (time <= 1) {
       clearInterval(this.timerInterval);
-      onTimeIsUp();
     }
+
+    onTimeChange();
   }
 }
 
 Timer.propTypes = {
   time: PropTypes.number.isRequired,
   onTimeChange: PropTypes.func.isRequired,
-  onTimeIsUp: PropTypes.func.isRequired
 };
 
 export default Timer;

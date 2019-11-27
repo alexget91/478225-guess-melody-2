@@ -21,4 +21,9 @@ const artistQuestion = {
   })).isRequired
 };
 
-export {genreQuestion, artistQuestion};
+const userData = {
+  id: PropTypes.number.isRequired,
+  email: PropTypes.string.isRequired,
+};
+
+export {genreQuestion, artistQuestion, userData};

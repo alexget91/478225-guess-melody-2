@@ -1,4 +1,4 @@
-import settings from "../../../mocks/settings";
+import settings from "../../../common/settings";
 
 const initialState = {
   step: -1,
@@ -28,7 +28,7 @@ const ActionCreator = {
     payload: 1
   }),
 
-  incrementMistakes: (userAnswer, question, mistakes, maxMistakes) => {
+  incrementMistakes: (userAnswer, question) => {
     let answerIsCorrect = false;
 
     switch (question.type) {
@@ -38,12 +38,6 @@ const ActionCreator = {
       case `genre`:
         answerIsCorrect = isGenreAnswerCorrect(userAnswer, question);
         break;
-    }
-
-    if (!answerIsCorrect && mistakes + 1 >= maxMistakes) {
-      return {
-        type: ActionTypes.RESET
-      };
     }
 
     return {
@@ -57,11 +51,6 @@ const ActionCreator = {
     payload: 1
   }),
 
-  setStep: (step) => ({
-    type: ActionTypes.SET_STEP,
-    payload: step
-  }),
-
   reset: () => ({type: ActionTypes.RESET})
 };
 
@@ -70,10 +59,6 @@ const reducer = (state = initialState, action) => {
     case ActionTypes.INCREMENT_STEP:
       return Object.assign({}, state, {
         step: state.step + action.payload
-      });
-    case ActionTypes.SET_STEP:
-      return Object.assign({}, state, {
-        step: action.payload
       });
     case ActionTypes.INCREMENT_MISTAKES:
       return Object.assign({}, state, {
@@ -85,6 +70,7 @@ const reducer = (state = initialState, action) => {
       });
     case ActionTypes.RESET:
       return Object.assign({}, initialState, {
+        step: 0,
         questions: state.questions
       });
   }

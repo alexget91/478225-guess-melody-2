@@ -11,6 +11,17 @@ const Operation = {
         dispatch(ActionCreator.setAuthorizationRequired(false));
       });
   },
+  checkAuth: () => {
+    return (dispatch, _getState, api) => {
+      return api
+        .get(`/login`)
+        .then((res) => {
+          if (res.status === 200) {
+            dispatch(ActionCreator.setAuthorizationRequired(false));
+          }
+        });
+    };
+  },
 };
 
 export default Operation;

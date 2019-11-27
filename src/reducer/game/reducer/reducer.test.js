@@ -1,5 +1,4 @@
 import {ActionCreator, ActionTypes, isArtistAnswerCorrect, isGenreAnswerCorrect, reducer} from "./reducer";
-import {ScreenSteps} from "../../../common/constants";
 
 describe(`Business logic is correct`, () => {
   it(`Artist answer is checked correctly`, () => {
@@ -222,87 +221,10 @@ describe(`Action creators works correctly`, () => {
     });
   });
 
-  it(`Action creator resets state if user is answered incorrect and exceeded the number of permissible mistakes`, () => {
-    expect(ActionCreator.incrementMistakes({
-      artist: `incorrect`,
-      picture: ``
-    },
-    {
-      type: `artist`,
-      song: {
-        artist: `correct`,
-        src: ``
-      },
-      answers: [
-        {
-          artist: `correct`,
-          picture: ``
-        },
-        {
-          artist: `incorrect`,
-          picture: ``
-        },
-        {
-          artist: `incorrect-2`,
-          picture: ``
-        }
-      ]
-    }, Infinity, 0)).toEqual({
-      type: ActionTypes.RESET
-    });
-
-    expect(ActionCreator.incrementMistakes([false, true, true, false],
-        {
-          type: `genre`,
-          genre: `jazz`,
-          answers: [
-            {
-              src: ``,
-              genre: `rock`,
-            },
-            {
-              src: ``,
-              genre: `rock`,
-            },
-            {
-              src: ``,
-              genre: `jazz`,
-            },
-            {
-              src: ``,
-              genre: `rock`,
-            },
-          ]
-        }, Infinity, 0)).toEqual({
-      type: ActionTypes.RESET
-    });
-  });
-
   it(`Action creator for decrement time returns correct action`, () => {
     expect(ActionCreator.decrementTime()).toEqual({
       type: ActionTypes.DECREMENT_TIME,
       payload: 1
-    });
-  });
-
-  it(`Action creator for set step returns correct action for type "START"`, () => {
-    expect(ActionCreator.setStep(ScreenSteps.START)).toEqual({
-      type: ActionTypes.SET_STEP,
-      payload: ScreenSteps.START
-    });
-  });
-
-  it(`Action creator for set step returns correct action for type "FAIL_TIME"`, () => {
-    expect(ActionCreator.setStep(ScreenSteps.FAIL_TIME)).toEqual({
-      type: ActionTypes.SET_STEP,
-      payload: ScreenSteps.FAIL_TIME
-    });
-  });
-
-  it(`Action creator for set step returns correct action for type "FAIL_MISTAKES"`, () => {
-    expect(ActionCreator.setStep(ScreenSteps.FAIL_MISTAKES)).toEqual({
-      type: ActionTypes.SET_STEP,
-      payload: ScreenSteps.FAIL_MISTAKES
     });
   });
 
@@ -324,20 +246,6 @@ describe(`Reducer works correctly`, () => {
     expect(reducer(undefined, {})).toEqual(initialState);
   });
 
-  it(`Reducer should increment current step by a given value`, () => {
-    expect(reducer(initialState, {
-      type: ActionTypes.INCREMENT_STEP,
-      payload: 1
-    })).toEqual(Object.assign({}, initialState, {
-      step: 0,
-    }));
-
-    expect(reducer(initialState, {
-      type: ActionTypes.INCREMENT_STEP,
-      payload: 0
-    })).toEqual(Object.assign({}, initialState));
-  });
-
   it(`Reducer should increment number of mistakes by a given value`, () => {
     expect(reducer(initialState, {
       type: ActionTypes.INCREMENT_MISTAKES,
@@ -352,7 +260,7 @@ describe(`Reducer works correctly`, () => {
     })).toEqual(Object.assign({}, initialState));
   });
 
-  it(`Reducer should correctly reset application state (not reset questions)`, () => {
+  it(`Reducer should correctly reset application state`, () => {
     expect(reducer({
       questions: [{foo: `bar`}],
       step: 100,
@@ -361,6 +269,7 @@ describe(`Reducer works correctly`, () => {
     }, {
       type: ActionTypes.RESET
     })).toEqual(Object.assign({}, initialState, {
+      step: 0,
       questions: [{foo: `bar`}]
     }));
   });

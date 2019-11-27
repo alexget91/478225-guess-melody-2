@@ -8,7 +8,6 @@ it(`Header correctly renders after relaunch`, () => {
       mistakes={2}
       time={300}
       onTimeChange={jest.fn()}
-      onTimeIsUp={jest.fn()}
     />)
     .toJSON();
 

@@ -1,4 +1,4 @@
-import {getAuthorizationRequired} from "./selectors";
+import {getAuthorizationRequired, getUser} from "./selectors";
 import NameSpace from "../../name-spaces";
 
 const mockState = {
@@ -10,4 +10,8 @@ const mockState = {
 
 it(`"Authorization required" selector returns correct value from state`, () => {
   expect(getAuthorizationRequired(mockState)).toEqual(false);
+});
+
+it(`User selector returns correct value from state`, () => {
+  expect(getUser(mockState)).toEqual(null);
 });

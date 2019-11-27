@@ -1,7 +1,6 @@
 import axios from "axios";
-import {ActionCreator as UserActionCreator} from "./reducer/user/reducer/reducer";
 
-const configureAPI = (dispatch) => {
+const configureAPI = (onLoginFail) => {
   const api = axios.create({
     baseURL: `https://htmlacademy-react-2.appspot.com/guess-melody`,
     timeout: 5000,
@@ -14,8 +13,8 @@ const configureAPI = (dispatch) => {
     switch (err.response.status) {
       case 400:
         throw new Error(err.response.data.error);
-      case 403:
-        dispatch(UserActionCreator.setAuthorizationRequired(true));
+      case 401:
+        onLoginFail();
         break;
     }
 
