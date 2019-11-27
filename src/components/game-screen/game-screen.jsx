@@ -3,10 +3,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const GameScreen = (props) => {
-  const {children, type, mistakes, time, onTimeChange, onTimeIsUp} = props;
+  const {children, type, mistakes, time, onTimeChange} = props;
 
   return <section className={`game game--${type}`}>
-    <Header mistakes={mistakes} time={time} onTimeChange={onTimeChange} onTimeIsUp={onTimeIsUp}/>
+    <Header mistakes={mistakes} time={time} onTimeChange={onTimeChange}/>
     {children}
   </section>;
 };
@@ -17,7 +17,6 @@ GameScreen.propTypes = {
   mistakes: PropTypes.number,
   time: PropTypes.number.isRequired,
   onTimeChange: PropTypes.func.isRequired,
-  onTimeIsUp: PropTypes.func.isRequired,
 };
 
 export default GameScreen;

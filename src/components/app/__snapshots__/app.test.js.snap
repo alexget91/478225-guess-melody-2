@@ -56,7 +56,7 @@ exports[`App correctly renders after relaunch Artist question screen 1`] = `
       <span
         className="timer__secs"
       >
-        00
+        01
       </span>
     </div>
     <div
@@ -124,6 +124,152 @@ exports[`App correctly renders after relaunch Artist question screen 1`] = `
 </section>
 `;
 
+exports[`App correctly renders after relaunch Authorization screen 1`] = `
+<section
+  className="login"
+>
+  <div
+    className="login__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="login__title"
+  >
+    Необходима авторизация
+  </h2>
+  <p
+    className="login__text"
+  >
+    Представьтесь!
+  </p>
+  <form
+    action=""
+    className="login__form js-login-form"
+    onSubmit={[Function]}
+  >
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="name"
+      >
+        Логин
+      </label>
+      <input
+        className="login__input js-email-input"
+        id="name"
+        name="name"
+        required={true}
+        type="email"
+      />
+    </p>
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="password"
+      >
+        Пароль
+      </label>
+      <input
+        className="login__input js-password-input"
+        id="password"
+        name="password"
+        required={true}
+        type="password"
+      />
+      <span
+        className="login__error"
+      >
+        Неверный пароль
+      </span>
+    </p>
+    <button
+      className="login__button button"
+      type="submit"
+    >
+      Войти
+    </button>
+  </form>
+</section>
+`;
+
+exports[`App correctly renders after relaunch Fail screen (mistakes) 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Какая жалость!
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    У вас закончились все попытки. Ничего, повезёт в следующий раз!
+  </p>
+  <a
+    className="replay"
+    href="/"
+    onClick={[Function]}
+  >
+    Попробовать ещё раз
+  </a>
+</section>
+`;
+
+exports[`App correctly renders after relaunch Fail screen (time is over) 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Увы и ах!
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    Время вышло! Вы не успели отгадать все мелодии
+  </p>
+  <a
+    className="replay"
+    href="/"
+    onClick={[Function]}
+  >
+    Попробовать ещё раз
+  </a>
+</section>
+`;
+
 exports[`App correctly renders after relaunch Genre question screen 1`] = `
 <section
   className="game game--genre"
@@ -180,7 +326,7 @@ exports[`App correctly renders after relaunch Genre question screen 1`] = `
       <span
         className="timer__secs"
       >
-        00
+        01
       </span>
     </div>
     <div
@@ -288,12 +434,12 @@ exports[`App correctly renders after relaunch Welcome screen 1`] = `
   >
     <li>
       За 
-      0
+      0.016666666666666666
        минут нужно ответить на все вопросы.
     </li>
     <li>
       Можно допустить 
-      0
+      1
        ошибки.
     </li>
   </ul>
@@ -302,5 +448,95 @@ exports[`App correctly renders after relaunch Welcome screen 1`] = `
   >
     Удачи!
   </p>
+</section>
+`;
+
+exports[`App correctly renders after relaunch Win screen 1`] = `
+<section
+  className="login"
+>
+  <div
+    className="login__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="login__title"
+  >
+    Вы настоящий меломан!
+  </h2>
+  <p
+    className="login__total"
+  >
+    За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки
+  </p>
+  <p
+    className="login__text"
+  >
+    Хотите сравнить свой результат с предыдущими попытками? Представьтесь!
+  </p>
+  <form
+    action=""
+    className="login__form js-login-form"
+    onSubmit={[Function]}
+  >
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="name"
+      >
+        Логин
+      </label>
+      <input
+        className="login__input js-email-input"
+        id="name"
+        name="name"
+        required={true}
+        type="email"
+      />
+    </p>
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="password"
+      >
+        Пароль
+      </label>
+      <input
+        className="login__input js-password-input"
+        id="password"
+        name="password"
+        required={true}
+        type="password"
+      />
+      <span
+        className="login__error"
+      >
+        Неверный пароль
+      </span>
+    </p>
+    <button
+      className="login__button button"
+      type="submit"
+    >
+      Войти
+    </button>
+  </form>
+  <a
+    className="replay"
+    href="/"
+    onClick={[Function]}
+  >
+    Сыграть ещё раз
+  </a>
 </section>
 `;

@@ -847,6 +847,7 @@ img {
   padding-right: 40px;
   color: #ff9749;
   font-size: 30px;
+  text-decoration: none;
   border: none;
   background: transparent; }
   .replay::after {

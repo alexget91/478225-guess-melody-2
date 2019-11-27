@@ -4,7 +4,7 @@ import AuthorizationScreen from "./authorization-screen";
 
 it(`Authorization screen correctly renders after relaunch`, () => {
   const tree = renderer
-    .create(<AuthorizationScreen onFormSubmit={jest.fn()}/>)
+    .create(<AuthorizationScreen onAuthFormSubmit={jest.fn()}/>)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
