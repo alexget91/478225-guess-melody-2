@@ -1,9 +1,9 @@
 const path = require(`path`);
 
 module.exports = {
-  entry: `./src/index.js`,
+  entry: `./src/index.tsx`,
   resolve: {
-    extensions: [`.js`, `.jsx`]
+    extensions: [`.js`, `.jsx`, `.ts`, `.tsx`, `json`]
   },
   output: {
     filename: `bundle.js`,
@@ -24,6 +24,10 @@ module.exports = {
         use: {
           loader: `babel-loader`,
         },
+      },
+      {
+        test: /\.(tsx|ts)?$/,
+        loader: `ts-loader`
       }
     ],
   },

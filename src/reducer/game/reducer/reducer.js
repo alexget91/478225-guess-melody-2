@@ -1,4 +1,5 @@
 import settings from "../../../common/settings";
+import {QuestionType} from "../../../common/constants";
 
 const initialState = {
   step: -1,
@@ -32,10 +33,10 @@ const ActionCreator = {
     let answerIsCorrect = false;
 
     switch (question.type) {
-      case `artist`:
+      case QuestionType.ARTIST:
         answerIsCorrect = isArtistAnswerCorrect(userAnswer, question);
         break;
-      case `genre`:
+      case QuestionType.GENRE:
         answerIsCorrect = isGenreAnswerCorrect(userAnswer, question);
         break;
     }

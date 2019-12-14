@@ -1,0 +1,540 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App correctly renders after relaunch Artist question screen 1`] = `
+<section
+  className="game game--artist"
+>
+  <header
+    className="game__header"
+  >
+    <a
+      className="game__back"
+      href="#"
+    >
+      <span
+        className="visually-hidden"
+      >
+        Сыграть ещё раз
+      </span>
+      <img
+        alt="Угадай мелодию"
+        className="game__logo"
+        src="img/melody-logo-ginger.png"
+      />
+    </a>
+    <svg
+      className="timer"
+      viewBox="0 0 780 780"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        className="timer__line"
+        cx="390"
+        cy="390"
+        r="370"
+        style={
+          Object {
+            "filter": "url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center",
+          }
+        }
+      />
+    </svg>
+    <div
+      className="timer__value"
+    >
+      <span
+        className="timer__mins"
+      >
+        00
+      </span>
+      <span
+        className="timer__dots"
+      >
+        :
+      </span>
+      <span
+        className="timer__secs"
+      >
+        01
+      </span>
+    </div>
+    <div
+      className="game__mistakes"
+    >
+      
+    </div>
+  </header>
+  <section
+    className="game__screen"
+  >
+    <h2
+      className="game__title"
+    >
+      Кто исполняет эту песню?
+    </h2>
+    <div
+      className="game__track"
+    >
+      <div
+        className="track"
+      >
+        <button
+          className="track__button track__button--play js-track-button"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        />
+        <div
+          className="track__status"
+        >
+          <audio />
+        </div>
+      </div>
+    </div>
+    <form
+      className="game__artist"
+    >
+      <div
+        className="artist"
+      >
+        <input
+          className="artist__input visually-hidden js-answer-input"
+          data-index={0}
+          id="answer-0"
+          name="answer"
+          onChange={[Function]}
+          type="radio"
+          value="answer-0"
+        />
+        <label
+          className="artist__name"
+          htmlFor="answer-0"
+        >
+          <img
+            alt=""
+            className="artist__picture"
+            src=""
+          />
+          
+        </label>
+      </div>
+    </form>
+  </section>
+</section>
+`;
+
+exports[`App correctly renders after relaunch Authorization screen 1`] = `
+<section
+  className="login"
+>
+  <div
+    className="login__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="login__title"
+  >
+    Необходима авторизация
+  </h2>
+  <p
+    className="login__text"
+  >
+    Представьтесь!
+  </p>
+  <form
+    action=""
+    className="login__form js-login-form"
+    onSubmit={[Function]}
+  >
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="name"
+      >
+        Логин
+      </label>
+      <input
+        className="login__input js-email-input"
+        id="name"
+        name="name"
+        required={true}
+        type="email"
+      />
+    </p>
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="password"
+      >
+        Пароль
+      </label>
+      <input
+        className="login__input js-password-input"
+        id="password"
+        name="password"
+        required={true}
+        type="password"
+      />
+      <span
+        className="login__error"
+      >
+        Неверный пароль
+      </span>
+    </p>
+    <button
+      className="login__button button"
+      type="submit"
+    >
+      Войти
+    </button>
+  </form>
+</section>
+`;
+
+exports[`App correctly renders after relaunch Fail screen (mistakes) 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Какая жалость!
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    У вас закончились все попытки. Ничего, повезёт в следующий раз!
+  </p>
+  <a
+    className="replay"
+    href="/"
+    onClick={[Function]}
+  >
+    Попробовать ещё раз
+  </a>
+</section>
+`;
+
+exports[`App correctly renders after relaunch Fail screen (time is over) 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Увы и ах!
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    Время вышло! Вы не успели отгадать все мелодии
+  </p>
+  <a
+    className="replay"
+    href="/"
+    onClick={[Function]}
+  >
+    Попробовать ещё раз
+  </a>
+</section>
+`;
+
+exports[`App correctly renders after relaunch Genre question screen 1`] = `
+<section
+  className="game game--genre"
+>
+  <header
+    className="game__header"
+  >
+    <a
+      className="game__back"
+      href="#"
+    >
+      <span
+        className="visually-hidden"
+      >
+        Сыграть ещё раз
+      </span>
+      <img
+        alt="Угадай мелодию"
+        className="game__logo"
+        src="img/melody-logo-ginger.png"
+      />
+    </a>
+    <svg
+      className="timer"
+      viewBox="0 0 780 780"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle
+        className="timer__line"
+        cx="390"
+        cy="390"
+        r="370"
+        style={
+          Object {
+            "filter": "url(#blur); transform: rotate(-90deg) scaleY(-1); transform-origin: center",
+          }
+        }
+      />
+    </svg>
+    <div
+      className="timer__value"
+    >
+      <span
+        className="timer__mins"
+      >
+        00
+      </span>
+      <span
+        className="timer__dots"
+      >
+        :
+      </span>
+      <span
+        className="timer__secs"
+      >
+        01
+      </span>
+    </div>
+    <div
+      className="game__mistakes"
+    >
+      
+    </div>
+  </header>
+  <section
+    className="game__screen"
+  >
+    <h2
+      className="game__title"
+    >
+      Выберите 
+      
+       треки
+    </h2>
+    <form
+      className="game__tracks js-answer-form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="track"
+      >
+        <button
+          className="track__button track__button--play js-track-button"
+          disabled={true}
+          onClick={[Function]}
+          type="button"
+        />
+        <div
+          className="track__status"
+        >
+          <audio />
+        </div>
+        <div
+          className="game__answer"
+        >
+          <input
+            checked={false}
+            className="game__input visually-hidden"
+            data-index={0}
+            id="answer-0"
+            name="answer"
+            onChange={[Function]}
+            type="checkbox"
+            value="answer-0"
+          />
+          <label
+            className="game__check"
+            htmlFor="answer-0"
+          >
+            Отметить
+          </label>
+        </div>
+      </div>
+      <button
+        className="game__submit button"
+        type="submit"
+      >
+        Ответить
+      </button>
+    </form>
+  </section>
+</section>
+`;
+
+exports[`App correctly renders after relaunch Welcome screen 1`] = `
+<section
+  className="welcome"
+>
+  <div
+    className="welcome__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <button
+    className="welcome__button js-game-start"
+    onClick={[MockFunction]}
+  >
+    <span
+      className="visually-hidden"
+    >
+      Начать игру
+    </span>
+  </button>
+  <h2
+    className="welcome__rules-title"
+  >
+    Правила игры
+  </h2>
+  <p
+    className="welcome__text"
+  >
+    Правила просты:
+  </p>
+  <ul
+    className="welcome__rules-list"
+  >
+    <li>
+      За 
+      0.016666666666666666
+       минут нужно ответить на все вопросы.
+    </li>
+    <li>
+      Можно допустить 
+      1
+       ошибки.
+    </li>
+  </ul>
+  <p
+    className="welcome__text"
+  >
+    Удачи!
+  </p>
+</section>
+`;
+
+exports[`App correctly renders after relaunch Win screen 1`] = `
+<section
+  className="login"
+>
+  <div
+    className="login__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="login__title"
+  >
+    Вы настоящий меломан!
+  </h2>
+  <p
+    className="login__total"
+  >
+    За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки
+  </p>
+  <p
+    className="login__text"
+  >
+    Хотите сравнить свой результат с предыдущими попытками? Представьтесь!
+  </p>
+  <form
+    action=""
+    className="login__form js-login-form"
+    onSubmit={[Function]}
+  >
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="name"
+      >
+        Логин
+      </label>
+      <input
+        className="login__input js-email-input"
+        id="name"
+        name="name"
+        required={true}
+        type="email"
+      />
+    </p>
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="password"
+      >
+        Пароль
+      </label>
+      <input
+        className="login__input js-password-input"
+        id="password"
+        name="password"
+        required={true}
+        type="password"
+      />
+      <span
+        className="login__error"
+      >
+        Неверный пароль
+      </span>
+    </p>
+    <button
+      className="login__button button"
+      type="submit"
+    >
+      Войти
+    </button>
+  </form>
+  <a
+    className="replay"
+    href="/"
+    onClick={[Function]}
+  >
+    Сыграть ещё раз
+  </a>
+</section>
+`;

@@ -1,9 +1,10 @@
 import {ActionCreator, ActionTypes, isArtistAnswerCorrect, isGenreAnswerCorrect, reducer} from "./reducer";
+import {QuestionType} from "../../../common/constants";
 
 describe(`Business logic is correct`, () => {
   it(`Artist answer is checked correctly`, () => {
     expect(isArtistAnswerCorrect(`1`, {
-      type: `artist`,
+      type: QuestionType.ARTIST,
       song: {
         artist: `1`,
         src: ``,
@@ -25,7 +26,7 @@ describe(`Business logic is correct`, () => {
     })).toEqual(true);
 
     expect(isArtistAnswerCorrect(`1`, {
-      type: `artist`,
+      type: QuestionType.ARTIST,
       song: {
         artist: `2`,
         src: ``,
@@ -49,7 +50,7 @@ describe(`Business logic is correct`, () => {
 
   it(`Genre answer is checked correctly`, () => {
     expect(isGenreAnswerCorrect([true, false, true, false], {
-      type: `genre`,
+      type: QuestionType.GENRE,
       genre: `rock`,
       answers: [
         {
@@ -72,7 +73,7 @@ describe(`Business logic is correct`, () => {
     })).toEqual(true);
 
     expect(isGenreAnswerCorrect([true, false, false, false], {
-      type: `genre`,
+      type: QuestionType.GENRE,
       genre: `rock`,
       answers: [
         {
@@ -107,7 +108,7 @@ describe(`Action creators works correctly`, () => {
   it(`Action creator for incrementing mistake returns action with 0 payload when artist answer is correct`, () => {
     expect(ActionCreator.incrementMistakes(`correct`,
         {
-          type: `artist`,
+          type: QuestionType.ARTIST,
           song: {
             artist: `correct`,
             src: ``
@@ -138,7 +139,7 @@ describe(`Action creators works correctly`, () => {
       picture: ``
     },
     {
-      type: `artist`,
+      type: QuestionType.ARTIST,
       song: {
         artist: `correct`,
         src: ``
@@ -166,7 +167,7 @@ describe(`Action creators works correctly`, () => {
   it(`Action creator for incrementing mistake returns action with 0 payload when genre answer is correct`, () => {
     expect(ActionCreator.incrementMistakes([false, false, true, false],
         {
-          type: `genre`,
+          type: QuestionType.GENRE,
           genre: `jazz`,
           answers: [
             {
@@ -195,7 +196,7 @@ describe(`Action creators works correctly`, () => {
   it(`Action creator for incrementing mistake returns action with 1 payload when genre answer is incorrect`, () => {
     expect(ActionCreator.incrementMistakes([false, true, true, false],
         {
-          type: `genre`,
+          type: QuestionType.GENRE,
           genre: `jazz`,
           answers: [
             {
