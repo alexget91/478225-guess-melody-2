@@ -1,5 +1,6 @@
 import {createSelector} from "reselect";
 import NameSpace from "../../name-spaces";
+import {QuestionType} from "../../../common/constants";
 
 const NAME_SPACE = NameSpace.DATA;
 
@@ -13,7 +14,7 @@ const getQuestions = (state) => {
 
 const getGenreQuestions = createSelector(
     getQuestions,
-    (questions) => questions.filter((it) => it.type === `genre`)
+    (questions) => questions.filter((it) => it.type === QuestionType.GENRE)
 );
 
 const getArtistQuestions = createSelector(
@@ -24,7 +25,7 @@ const getArtistQuestions = createSelector(
     // Последняя функция принимает результаты всех предыдущих функций
     // и возвращает результат на их основе
     (resultOne, resultTwo) => {
-      return resultOne.filter((it) => resultTwo && it.type === `artist`);
+      return resultOne.filter((it) => resultTwo && it.type === QuestionType.ARTIST);
     }
 );
 

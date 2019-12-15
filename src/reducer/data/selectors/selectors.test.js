@@ -1,14 +1,15 @@
 import {getGenreQuestions, getQuestions} from "./selectors";
 import NameSpace from "../../name-spaces";
+import {QuestionType} from "../../../common/constants";
 
 const mockQuestions = [
   {
-    type: `genre`,
+    type: QuestionType.GENRE,
     genre: `rock`,
     answers: [],
   },
   {
-    type: `artist`,
+    type: QuestionType.ARTIST,
     song: {
       artist: `1`,
       src: ``,
@@ -16,17 +17,17 @@ const mockQuestions = [
     answers: [],
   },
   {
-    type: `genre`,
+    type: QuestionType.GENRE,
     genre: `jazz`,
     answers: [],
   },
   {
-    type: `genre`,
+    type: QuestionType.GENRE,
     genre: `folk`,
     answers: [],
   },
   {
-    type: `artist`,
+    type: QuestionType.ARTIST,
     song: {
       artist: `2`,
       src: ``,
@@ -48,17 +49,17 @@ it(`Questions selector returns correct questions from state`, () => {
 it(`Genre questions selector returns correct questions from state`, () => {
   expect(getGenreQuestions(mockState)).toEqual([
     {
-      type: `genre`,
+      type: QuestionType.GENRE,
       genre: `rock`,
       answers: [],
     },
     {
-      type: `genre`,
+      type: QuestionType.GENRE,
       genre: `jazz`,
       answers: [],
     },
     {
-      type: `genre`,
+      type: QuestionType.GENRE,
       genre: `folk`,
       answers: [],
     },
@@ -68,7 +69,7 @@ it(`Genre questions selector returns correct questions from state`, () => {
 /* it(`Artist questions selector returns correct questions from state`, () => {
   expect(getArtistQuestions(mockState)).toEqual([
     {
-      type: `artist`,
+      type: QuestionType.ARTIST,
       song: {
         artist: `1`,
         src: ``,
@@ -76,7 +77,7 @@ it(`Genre questions selector returns correct questions from state`, () => {
       answers: [],
     },
     {
-      type: `artist`,
+      type: QuestionType.ARTIST,
       song: {
         artist: `2`,
         src: ``,
